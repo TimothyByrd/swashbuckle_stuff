@@ -54,6 +54,15 @@ namespace swashbuckle_stuff
                     }
                 }
             }
+            
+            // make all required parameters in model not nullable
+            foreach (var schema in openApiDoc.Components.Schemas.Values)
+            {
+                foreach (var requiredParameter in schema.Required)
+                {
+                    schema.Properties[requiredParameter].Nullable = false;
+                }
+            }
         }
     }
 }
